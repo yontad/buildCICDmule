@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="0a351d9b-1481-4683-bf58-c8e47f135a14" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="democicdFlow" doc:id="a81b57e7-c2e0-47d3-a082-f550d1b3dd46" >
+		<http:listener doc:name="Listener" doc:id="7a634132-762f-4ec4-b2ca-cef2616e9232" config-ref="HTTP_Listener_config" path="/demoCICD"/>
+		<set-payload value="#[payload]" doc:name="Set Payload" doc:id="eb1b9a5e-0a8a-4a39-ac23-516c3f01acd4" />
+		<logger level="INFO" doc:name="Logger" doc:id="fd0f787d-3166-40fa-806f-3c76bf0ceebe" message="START #[flow.name ++ ' | &quot;correlationId&quot; : &quot;' ++ correlationId ++ '&quot;']"/>
+	</flow>
+</mule>
